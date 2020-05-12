@@ -1,6 +1,8 @@
 const posts = [
     {
       id: 1,
+      likeCount: null,
+      liked: false,
       header: 'Кобаяси Исса — Я наказал ребенка',
       content:
           'Я наказал ребенка,\n'
@@ -24,18 +26,24 @@ const posts = [
     },
     {
       id: 2,
+      likeCount: 22,
+      liked: true,
       header: 'Мацуо Басё — Луна проплыла',
       content:
           'Луна проплыла,\n Ветви оцепенели\n В блестках дождевых.',
     },
     {
       id: 3,
+      likeCount: 7,
+      liked: false,
       header: 'Мацуо Басё — Прощайте, вишни',
       content:
           'Прощайте, вишни!\n Цветенье ваше мой путь\n Теплом согреет.',
     },
     {
       id: 4,
+      likeCount: 2100,
+      liked: true,
       header: 'Мацуо Басё — Совсем исхудал',
       content: 'Совсем исхудал,\n И волосы отросли.\n Долгие дожди.',
     },

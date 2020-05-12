@@ -9,7 +9,6 @@ class PostsController {
     if (index === -1) {
       throw new HttpError ('Post not found', 404);
     }
-
     res.json(posts[index]);
   }
 
@@ -44,8 +43,7 @@ class PostsController {
     const index = posts.findIndex((p) => +p.id === +req.params.id);
 
     if (index === -1) {
-      throw new HttpError ('Post not found', 404);
-      
+      throw new HttpError ('Post not found', 404);      
     }
 
     posts.splice(index, 1);

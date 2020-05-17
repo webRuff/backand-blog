@@ -5,9 +5,15 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import routes from './routes';
 import ErrorHandler from './middleware/ErrorHandler'
+import mongoose from 'mongoose'
 
 const root = path.join.bind(this, __dirname, '../');
 dotenv.config({ path: root('.env') });
+//подключение mongoose
+mongoose
+.connect(process.env.MONGO_URI, { useNewUrlParser: true })
+.catch((e) => console.log(e));
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());

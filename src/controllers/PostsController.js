@@ -1,53 +1,59 @@
-import posts from '../models/Post';
+import Post from '../models/Post';
 import TryCatch from '../decorators/TryCatchMiddlewereDecorator';
+import { modelNames } from 'mongoose';
+
+
+
 
 class PostsController {
+//get
+  static async getPostById(id) {
+    const post = await Post.findById(id);
+
+    if (!post) {
+      throw new HttpError ('Post not found', 404);
+    }
+    return post;
+  }
+
   @TryCatch
   static async read(req, res) {
-    const index = posts.findIndex((p) => +p.id === +req.params.id);
-
-    if (index === -1) {
-      throw new HttpError ('Post not found', 404);
-    }
-    res.json(posts[index]);
+    const post = await this.getPostById
+    res.json(post); //возвращаемое значение
   }
-
+//get
   @TryCatch
   static async list(req, res) {
+    const posts = await Post.find();
     res.json(posts);
   }
-
+//post
   @TryCatch
   static async create(req, res) {
-    posts.push(req.body);
+    const model = new Post(req.body);
+    const post = await model.save();
 
-    res.json({ status: true, post: req.body });
+    res.json({ status: true, post});
   }
-
+//put
   @TryCatch
   static async update(req, res) {
-    const index = posts.findIndex((p) => +p.id === +req.params.id);
+  const post = await PostsController.getPostById(req.params.id);
+  
+   post.header = req.body.header;
+   post.content = req.body.content;
+   await post.save(); //сохраняет данные в mongoose 
 
-    if (index === -1) {
-      throw new HttpError ('Post not found', 404);
-    }
-
-    posts[index].header = req.body.header;
-    posts[index].content = req.body.content;
-
-    res.json({ status: true, post: posts[index] });
+    res.json({ status: true, post });
   }
-
+//delete
   @TryCatch
   static async delete(req, res) {
-    const index = posts.findIndex((p) => +p.id === +req.params.id);
+    const post = await PostsController.getPostById(req.params.id);
 
-    if (index === -1) {
-      throw new HttpError ('Post not found', 404);      
-    }
+    await post.delete();
 
-    posts.splice(index, 1);
-
+    res.json({ status: true});
     res.status(204).end();
   }
 }

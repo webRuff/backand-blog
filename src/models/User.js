@@ -7,12 +7,13 @@ const UserSchema = new Schema(
       required: true,
       minlength: 2,
       maxlength: 40,
+      unique: true,
       trim: true,
     },
     password: {
       type: String,
       required: true,
-      minlength: 8,
+      minlength: 3,
       maxlength: 60,
     },
     email: {
@@ -21,6 +22,18 @@ const UserSchema = new Schema(
       unique: true,
       trim: true,
     },
+    mySubs: {
+      type: Array,
+      default: null,
+    },
+    followers: {
+      type: Array,
+      default: null,
+    },
+    likedPosts: {
+      type: Array,
+      default: null
+    }
   },
   {
     timestamps: true,

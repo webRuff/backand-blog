@@ -3,7 +3,7 @@ import PostsController from '../controllers/PostsController';
 
 const router = Router();
 
-router.get('/post/:id', PostsController.read);
+router.get('/posts/:id', PostsController.read);
 router.get('/posts', PostsController.list);
 router.post('/posts', PostsController.create);
 router.put('/posts/:id', PostsController.update);

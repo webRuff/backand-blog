@@ -1,12 +1,10 @@
 import Post from '../models/Post';
 import TryCatch from '../decorators/TryCatchMiddlewereDecorator';
 import { modelNames } from 'mongoose';
-
-
-
+import HttpError from '../exeptions/HttpError'
 
 class PostsController {
-//get
+
   static async getPostById(id) {
     const post = await Post.findById(id);
 
@@ -15,10 +13,10 @@ class PostsController {
     }
     return post;
   }
-
+//get
   @TryCatch
   static async read(req, res) {
-    const post = await this.getPostById
+    const post = await this.getPostById(req.params.id)
     res.json(post); //возвращаемое значение
   }
 //get

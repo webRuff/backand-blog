@@ -22,18 +22,18 @@ const UserSchema = new Schema(
       unique: true,
       trim: true,
     },
+    likedPosts: {
+      type: Array,
+      default: [],
+    },
     mySubs: {
       type: Array,
-      default: null,
+      default: [],
     },
     followers: {
       type: Array,
-      default: null,
-    },
-    likedPosts: {
-      type: Array,
-      default: null
-    }
+      default: [],
+    },   
   },
   {
     timestamps: true,

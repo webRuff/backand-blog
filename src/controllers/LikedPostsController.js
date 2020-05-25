@@ -48,7 +48,7 @@ class LikedPostController {
   }
 
   @TryCatch
-  static async read(req, res) {
+  static async getLikedPostsHistory(req, res) {
     const likePostsHistory = await LikedPostController.getlikedPostsById(req.params.id)
     res.json(likePostsHistory); 
   }
@@ -56,7 +56,7 @@ class LikedPostController {
   @TryCatch
   static async list(req, res) {
     const likePostsHistory = await LikePostsHistory.find();
-    res.json(likePostsHistory);
+    res.json({status: true,likePostsHistory});
   }
 };
 

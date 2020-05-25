@@ -7,7 +7,6 @@ class PostsController {
 
   static async getPostById(id) {
     const post = await Post.findById(id);
-
     if (!post) {
       throw new HttpError ('Post not found', 404);
     }
@@ -16,7 +15,8 @@ class PostsController {
 //get
   @TryCatch
   static async read(req, res) {
-    const post = await this.getPostById(req.params.id)
+    const post = await PostsController.getPostById(req.params.id)
+    
     res.json(post); //возвращаемое значение
   }
 //get
@@ -54,6 +54,25 @@ class PostsController {
     res.json({ status: true});
     res.status(204).end();
   }
+
+  @TryCatch
+  static async addLike(req, res) {
+  const post = await PostsController.getPostById(req.params.id);
+  
+   post.likesCount++;
+   await post.save(); 
+
+    res.json({ status: true, post });
+  }
+  @TryCatch
+  static async removeLike(req, res) {
+  const post = await PostsController.getPostById(req.params.id);
+  
+   post.likesCount--
+   await post.save(); 
+    res.json({ status: true, post });
+  }
+  
 }
 
 export default PostsController;

@@ -33,7 +33,10 @@ const UserSchema = new Schema(
     followers: {
       type: Array,
       default: [],
-    },   
+    }, 
+    userImg: {
+      type: String,
+    },  
   },
   {
     timestamps: true,

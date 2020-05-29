@@ -20,7 +20,10 @@
         postAuthor: {
           type: String,
           required: true,
-        },
+      },
+        authorImg: {
+          type: String,
+      },
     },
     {
       timestamps: true, //добавляет поля дат создания и обновления записи
